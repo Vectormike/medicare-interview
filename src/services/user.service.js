@@ -12,7 +12,7 @@ const createUser = async (userBody) => {
   if (await User.isEmailTaken(userBody.email)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
-  const uniqueCode = randomBytes(4);
+  const uniqueCode = randomBytes(4).toString('hex');
   const user = await User.create(userBody);
   return { user, uniqueCode };
 };
